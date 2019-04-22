@@ -4,21 +4,23 @@ import org.openqa.selenium.WebElement;
 import static java.lang.Thread.sleep;
 
 public class LoginPage {
-    WebDriver driver;
 
-    WebElement userEmailLogin;
-    WebElement userPasswordLinkedin;
-    WebElement submitToLinkedin;
+    private WebDriver driver;
+    private WebElement userEmailLogin;
+    private WebElement userPasswordLinkedin;
+    private WebElement submitToLinkedin;
+    private WebElement signUpForm;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
         initElements();
     }
 
-    public void initElements(){
+    private void initElements(){
         userEmailLogin = driver.findElement(By.xpath("//input[@id='login-email']"));
         userPasswordLinkedin = driver.findElement(By.xpath("//input[@id='login-password']"));
         submitToLinkedin = driver.findElement(By.xpath("//input[@id='login-submit']"));
+        signUpForm = driver.findElement(By.xpath("//form[@id='regForm']"));
     }
 
     public void login(String userEmail, String userPassword) {
@@ -30,5 +32,13 @@ public class LoginPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getTitleText(){
+        return driver.getTitle();
+    }
+
+    public boolean isSignUpFormDisplayed(){
+        return signUpForm.isDisplayed();
     }
 }

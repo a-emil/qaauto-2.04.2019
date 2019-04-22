@@ -10,15 +10,12 @@ public class LoginTest {
 
     public WebDriver driver;
     public static String projectUrl = "https://www.linkedin.com";
-    public static String wrongUserPassword = "Test222)";
-    public static String errorMSG = "Hmm, that's not the right password. Please try again or request a new one.s";
-    //public static String errorMSG = "Это неверный пароль. Повторите попытку или измените пароль.";
 
 
     @Test
     public void successfulLoginTest() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
@@ -43,16 +40,14 @@ public class LoginTest {
         driver = new ChromeDriver();
         driver.get(projectUrl);
 
-        WebElement userEmailLogin = driver.findElement(By.xpath("//input[@id='login-email']"));
-        WebElement userPasswordLinkedin = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement submitToLinkedin = driver.findElement(By.xpath("//input[@id='login-submit']"));
 
-       // userEmailLogin.sendKeys(userEmail);
-        userPasswordLinkedin.sendKeys(wrongUserPassword);
-        submitToLinkedin.click();
 
-        WebElement errorMessage = driver.findElement(By.xpath("//div[@id='error-for-password']"));
-        Assert.assertEquals(errorMessage.getText(), errorMSG, "Error page are not displayed");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("engineertest70@gmail.com", "Test222)");
+
+        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
+        Assert.assertEquals(loginSubmitPage.getErrorMessage(), "Hmm, that's not the right password. Please try again or request a new one.", "Error page are not displayed");
+        //Assert.assertEquals(loginSubmitPage.getErrorMessage(), "Это неверный пароль. Повторите попытку или измените пароль.", "Error page are not displayed");
 
         driver.quit();
     }
@@ -65,23 +60,14 @@ public class LoginTest {
         driver = new ChromeDriver();
         driver.get(projectUrl);
 
-        WebElement userEmailLogin = driver.findElement(By.xpath("//input[@id='login-email']"));
-        WebElement userPasswordLinkedin = driver.findElement(By.xpath("//input[@id='login-password']"));
-        WebElement submitToLinkedin = driver.findElement(By.xpath("//input[@id='login-submit']"));
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("engineertest70@gmail.com", "");
 
-      //  userEmailLogin.sendKeys(userEmail);
-        userPasswordLinkedin.sendKeys("");
-        submitToLinkedin.click();
 
-        // successfulPageOpenTest
-        //Assert.assertEquals(driver.getTitle(), "LinkedIn: Войти или зарегистрироваться ");
-        Assert.assertEquals(driver.getTitle(), "LinkedIn: Log In or Sign Up ");
-
-        WebElement signUpForm = driver.findElement(By.xpath("//form[@id='reg-form']"));
-        Assert.assertTrue(signUpForm.isDisplayed(),
-                "Login page is still displayed");
+        //Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Log In or Sign Up ");
+        Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Войти или зарегистрироваться ");
+        Assert.assertTrue(loginPage.isSignUpFormDisplayed(), "Login page is still displayed");
 
         driver.quit();
-
     }
 }
