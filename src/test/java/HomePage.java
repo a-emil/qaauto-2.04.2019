@@ -13,17 +13,14 @@ public class HomePage {
     }
 
     private void initElements() {
-
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
     }
 
     public boolean isProfileMenuItemDisplayed(){
-
         return profileMenuItem.isDisplayed();
     }
 
     public void clickOnProfileMenuItem(){
-
         profileMenuItem.click();
     }
 

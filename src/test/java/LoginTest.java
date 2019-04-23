@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest {
@@ -11,18 +12,26 @@ public class LoginTest {
     public WebDriver driver;
     public static String projectUrl = "https://www.linkedin.com";
 
+    @DataProvider
+    public Object[][] validDataProvider() {
+        return new Object[][]{
+               // { "engineertest70@gmail.com", "Test111)" },
+                { "ENGINEERTEST70@gmail.com", "Test111)" }
+        };
+    }
 
-    @Test
-    public void successfulLoginTest() {
-        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+
+    @Test(dataProvider = "validDataProvider")
+    public void successfulLoginTest(String userEmail, String userPassword) {
+        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
 
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("engineertest70@gmail.com", "Test111)");
+        loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Home page is displayed");
@@ -34,8 +43,8 @@ public class LoginTest {
 
     @Test
     public void negativeLoginTestIncorrect(){
-        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
@@ -53,9 +62,9 @@ public class LoginTest {
     }
 
     @Test
-    public void negativeLoginTestEmpty(){
-        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+    public void negativeLoginTestWithEmptyFields(){
+        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
@@ -63,10 +72,7 @@ public class LoginTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("engineertest70@gmail.com", "");
 
-
-        //Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Log In or Sign Up ");
-        Assert.assertEquals(loginPage.getTitleText(), "LinkedIn: Войти или зарегистрироваться ");
-        Assert.assertTrue(loginPage.isSignUpFormDisplayed(), "Login page is still displayed");
+        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page is not displayed");
 
         driver.quit();
     }

@@ -34,11 +34,7 @@ public class LoginPage {
         }
     }
 
-    public String getTitleText(){
-        return driver.getTitle();
-    }
-
-    public boolean isSignUpFormDisplayed(){
+    public boolean isLoginPageDisplayed(){
         return signUpForm.isDisplayed();
     }
 }
