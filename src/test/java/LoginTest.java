@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,8 +13,24 @@ public class LoginTest {
     @DataProvider
     public Object[][] validDataProvider() {
         return new Object[][]{
-               // { "engineertest70@gmail.com", "Test111)" },
+                { "engineertest70@gmail.com", "Test111)" },
                 { "ENGINEERTEST70@gmail.com", "Test111)" }
+        };
+    }
+
+    @DataProvider
+    public Object[][] inValidDataProvider() {
+        return new Object[][]{
+                { "engineertest71@gmail.com", "Test111)" },
+                { "engineertest70@gmail.com", "Test222)" }
+        };
+    }
+
+    @DataProvider
+    public Object[][] EmptyDataProvider() {
+        return new Object[][]{
+                { "", "Test111)" },
+                { "engineertest70@gmail.com", "" }
         };
     }
 
@@ -35,14 +49,13 @@ public class LoginTest {
 
         HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Home page is displayed");
-        homePage.clickOnProfileMenuItem();
         Assert.assertEquals(homePage.getUserProfileName(), "Emilio Carmello", "Wrong profile user name displayed");
 
         driver.quit();
     }
 
-    @Test
-    public void negativeLoginTestIncorrect(){
+    @Test(dataProvider = "inValidDataProvider")
+    public void negativeLoginTestIncorrect(String userEmail, String userPassword){
         System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
@@ -52,7 +65,7 @@ public class LoginTest {
 
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("engineertest70@gmail.com", "Test222)");
+        loginPage.login(userEmail, userPassword);
 
         LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
         Assert.assertEquals(loginSubmitPage.getErrorMessage(), "Hmm, that's not the right password. Please try again or request a new one.", "Error page are not displayed");
@@ -61,16 +74,17 @@ public class LoginTest {
         driver.quit();
     }
 
-    @Test
-    public void negativeLoginTestWithEmptyFields(){
+    @Test(dataProvider = "EmptyDataProvider")
+    public void negativeLoginTestWithEmptyFields(String userEmail, String userPassword){
         System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
 
+
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("engineertest70@gmail.com", "");
+        loginPage.login(userEmail, userPassword);
 
         Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page is not displayed");
 
