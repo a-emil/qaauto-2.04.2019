@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class HomePage {
     private WebDriver driver;
@@ -9,7 +8,7 @@ public class HomePage {
     private WebElement userProfileName;
     private WebElement profileWelcomeCard;
 
-    public HomePage(WebDriver driver){
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         initElements();
     }
@@ -19,24 +18,24 @@ public class HomePage {
         profileWelcomeCard = driver.findElement(By.xpath("//a[@data-control-name='identity_welcome_message']"));
     }
 
-    public boolean isProfileMenuItemDisplayed(){
+    public boolean isProfileMenuItemDisplayed() {
         return profileMenuItem.isDisplayed();
     }
 
-    public void clickOnProfileMenuItem(){
+    public void clickOnProfileMenuItem() {
         profileMenuItem.click();
     }
 
-    public boolean isWelcomeCardDisplayed(){
+    public boolean isWelcomeCardDisplayed() {
         return profileWelcomeCard.isDisplayed();
     }
 
-    public String getUserProfileName(){
+    public String getUserProfileName() {
         userProfileName = driver.findElement(By.xpath("//ul[@id='nav-settings__dropdown-options']//h3"));
         return userProfileName.getText();
     }
 
-    public boolean isHomePageLoaded(){
+    public boolean isHomePageLoaded() {
         return userProfileName.isDisplayed();
     }
 }
