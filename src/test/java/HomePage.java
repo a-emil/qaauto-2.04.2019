@@ -16,7 +16,7 @@ public class HomePage {
 
     private void initElements() {
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
-        profileWelcomeCard = driver.findElement(By.xpath("//div[@class='feed-identity-module__actor-meta profile-rail-card__actor-meta break-words']"));
+        profileWelcomeCard = driver.findElement(By.xpath("//a[@data-control-name='identity_welcome_message']"));
     }
 
     public boolean isProfileMenuItemDisplayed(){
@@ -25,6 +25,10 @@ public class HomePage {
 
     public void clickOnProfileMenuItem(){
         profileMenuItem.click();
+    }
+
+    public boolean isWelcomeCardDisplayed(){
+        return profileWelcomeCard.isDisplayed();
     }
 
     public String getUserProfileName(){

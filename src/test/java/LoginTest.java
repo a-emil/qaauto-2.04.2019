@@ -48,7 +48,7 @@ public class LoginTest {
         loginPage.login(userEmail, userPassword);
 
         HomePage homePage = new HomePage(driver);
-        Assert.assertTrue(homePage.isProfileMenuItemDisplayed(), "Home page is displayed");
+        Assert.assertTrue(homePage.isWelcomeCardDisplayed(), "Home page is not displayed");
         Assert.assertEquals(homePage.getUserProfileName(), "Emilio Carmello", "Wrong profile user name displayed");
 
         driver.quit();
