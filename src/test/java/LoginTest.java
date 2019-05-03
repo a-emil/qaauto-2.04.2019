@@ -55,7 +55,7 @@ public class LoginTest {
     public void successfulLoginTest(String userEmail, String userPassword) {
         HomePage homePage = loginPage.login(userEmail, userPassword);
 
-        Assert.assertTrue(homePage.isWelcomeCardDisplayed(), "Home page is not displayed");
+        Assert.assertTrue(homePage.isHomePageLoaded(), "Home page is not displayed");
         Assert.assertEquals(homePage.getUserProfileName(), "Emilio Carmello", "Wrong profile user name displayed");
     }
 
