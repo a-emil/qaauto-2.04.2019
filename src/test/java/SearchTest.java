@@ -1,3 +1,4 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -5,6 +6,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static java.lang.Thread.sleep;
 
 public class SearchTest {
     private WebDriver driver;
@@ -21,8 +24,8 @@ public class SearchTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
@@ -44,7 +47,6 @@ public class SearchTest {
         SearchPage searchPage = homePage.searchRequest(searchTerm);
 
         Assert.assertTrue(searchPage.isSearchPageLoaded(), "Search page is not displayed");
-
 
         Assert.assertEquals(searchPage.getSearchResultsNumber(), 10, "Incorrect number of search results");
         Assert.assertTrue(searchPage.getSearchResultText(searchTerm), "Not all search results have 'HR' text");
