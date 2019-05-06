@@ -21,8 +21,8 @@ public class SearchTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        //System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);
@@ -31,7 +31,7 @@ public class SearchTest {
 
     @AfterMethod
     public void afterMethod() {
-        driver.quit();
+        //driver.quit();
     }
 
     @Test(dataProvider = "validDataProvider")
@@ -41,11 +41,12 @@ public class SearchTest {
         HomePage homePage = loginPage.login(userEmail, userPassword); // что за строка
         Assert.assertTrue(homePage.isHomePageLoaded(), "Home Page is not loaded");
 
-        homePage.searchRequest(searchTerm);
+        SearchPage searchPage = homePage.searchRequest(searchTerm);
 
         Assert.assertTrue(searchPage.isSearchPageLoaded(), "Search page is not displayed");
-        Assert.assertEquals(searchPage.getSearchResultsNumber(), 10, "Incorrect number of search results");
 
+
+        Assert.assertEquals(searchPage.getSearchResultsNumber(), 10, "Incorrect number of search results");
         Assert.assertTrue(searchPage.getSearchResultText(searchTerm), "Not all search results have 'HR' text");
     }
 }

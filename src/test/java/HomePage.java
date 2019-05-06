@@ -3,6 +3,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static java.lang.Thread.sleep;
+
 public class HomePage {
     private WebDriver driver;
     private WebElement profileMenuItem;
@@ -34,8 +36,14 @@ public class HomePage {
         return userProfileName.getText();
     }
 
-    public void searchRequest(String searchTerm){
+    public SearchPage searchRequest(String searchTerm){
         searchRequestField.sendKeys(searchTerm);
         searchRequestField.sendKeys(Keys.ENTER);
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new SearchPage(driver);
     }
 }
