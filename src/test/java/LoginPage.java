@@ -52,11 +52,6 @@ public class LoginPage {
         userEmailLogin.sendKeys(userEmail);
         userPasswordLinkedin.sendKeys(userPassword);
         submitToLinkedin.click();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return new LoginSubmitPage(driver);
     }
 

@@ -20,8 +20,8 @@ public class HomePage {
     private void initElements() {
         profileMenuItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
         profileWelcomeCard = driver.findElement(By.xpath("//a[@data-control-name='identity_welcome_message']"));
-        searchRequestField = driver.findElement(By.xpath("//div[@class='nav-search-typeahead']//input"));
-    }
+        searchRequestField = driver.findElement(By.xpath("//form[@id='extended-nav-search']//input"));
+}
 
     public boolean isProfileMenuItemDisplayed() {
         return profileMenuItem.isDisplayed();
