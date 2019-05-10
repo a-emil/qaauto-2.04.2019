@@ -1,9 +1,10 @@
+package page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginSubmitPage {
-    private WebDriver driver;
+public class LoginSubmitPage extends BasePage {
     private WebElement UserEmailValidationMessage;
     private WebElement UserPasswordValidationMessage;
     private WebElement signInForm;
@@ -20,7 +21,7 @@ public class LoginSubmitPage {
     }
 
 
-    public boolean isLoginSubmitPageLoaded() {
+    public boolean isPageLoaded() {
         return signInForm.isDisplayed();
     }
 

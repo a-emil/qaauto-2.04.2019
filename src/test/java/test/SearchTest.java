@@ -1,6 +1,9 @@
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import page.HomePage;
+import page.SearchPage;
 import java.util.List;
 
 public class SearchTest extends BaseTest{
@@ -26,20 +29,5 @@ public class SearchTest extends BaseTest{
         for(String searchResult: searchResultList){
             Assert.assertTrue(searchResult.contains(searchTerm), "searchTerm: " + searchTerm + " not found in \n" + searchResult);
         }
-    }
-
-    @Test
-    public void BasicSearchTest2(){
-        String userEmail = "engineertest70@gmail.com";
-        String userPassword = "Test111)";
-        String searchTerm = "HR";
-        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page is not displayed");
-
-        HomePage homePage = loginPage.login(userEmail, userPassword);
-
-        SearchPage searchPage = homePage.searchRequest(searchTerm);
-
-
-        searchPage.printResult();
     }
 }

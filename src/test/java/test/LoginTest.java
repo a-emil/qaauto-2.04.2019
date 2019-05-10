@@ -1,6 +1,10 @@
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import page.HomePage;
+import page.LoginSubmitPage;
 
 public class LoginTest extends BaseTest{
 
@@ -38,11 +42,11 @@ public class LoginTest extends BaseTest{
     }
 
     @Test(dataProvider = "inValidDataProvider")
-    public void negativeLoginTestWithInvslidData(String userEmail,
+    public void negativeLoginTestWithInvalidData(String userEmail,
                                                  String userPassword,
                                                  String userPasswordValidationMessage,
                                                  String userEmailValidationMessage) {
-        LoginSubmitPage loginSubmitPage = loginPage.loginToLoginSubmit(userEmail, userPassword);
+        LoginSubmitPage loginSubmitPage = loginPage.login(userEmail, userPassword);
 
         Assert.assertTrue(loginSubmitPage.isLoginSubmitPageLoaded(), "Login page is not loaded");
         Assert.assertEquals(loginSubmitPage.getUserEmailValidationMessage(), userEmailValidationMessage, "Wrong validation message on user email");
@@ -51,7 +55,7 @@ public class LoginTest extends BaseTest{
 
     @Test(dataProvider = "EmptyDataProvider")
     public void negativeLoginTestWithEmptyFields(String userEmail, String userPassword) {
-        loginPage.loginToLogin(userEmail, userPassword);
+        loginPage.login(userEmail, userPassword);
         Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page is not displayed");
     }
 }
