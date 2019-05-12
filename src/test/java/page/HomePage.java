@@ -23,7 +23,7 @@ public class HomePage extends BasePage{
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, HomePage.class);
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isProfileMenuItemDisplayed() {

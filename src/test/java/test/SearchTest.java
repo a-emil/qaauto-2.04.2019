@@ -13,14 +13,14 @@ public class SearchTest extends BaseTest{
         String userEmail = "engineertest70@gmail.com";
         String userPassword = "Test111)";
         String searchTerm = "HR";
-        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page is not displayed");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not displayed");
 
         HomePage homePage = loginPage.login(userEmail, userPassword);
-        Assert.assertTrue(homePage.isHomePageLoaded(), "Home Page is not loaded");
+        Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
 
         SearchPage searchPage = homePage.searchRequest(searchTerm);
 
-        Assert.assertTrue(searchPage.isSearchPageLoaded(), "Search page is not displayed");
+        Assert.assertTrue(searchPage.isPageLoaded(), "Search page is not displayed");
 
         Assert.assertEquals(searchPage.getSearchResultsNumber(), 10, "Incorrect number of search results");
 
