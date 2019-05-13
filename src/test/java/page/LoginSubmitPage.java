@@ -7,13 +7,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginSubmitPage extends BasePage {
 
-    @FindBy(xpath = "//div[@id='error-for-password']")
+    @FindBy(xpath = "//div[@id = 'error-for-password']")
     private WebElement UserEmailValidationMessage;
 
-    @FindBy(xpath = "//div[@id='error-for-username']")
+    @FindBy(xpath = "//div[@id = 'error-for-username']")
     private WebElement UserPasswordValidationMessage;
 
-    @FindBy(xpath = "//form[@class='login__form']")
+    @FindBy(xpath = "//form[@class = 'login__form']")
     private WebElement signInForm;
 
     public LoginSubmitPage(WebDriver driver) {

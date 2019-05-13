@@ -11,7 +11,7 @@ public class SetNewPasswordPage extends BasePage {
     private WebElement setNewPasswordForm;
 
     @FindBy(xpath = "//input[@id = 'newPassword']")
-    private WebElement NewPassword;
+    private WebElement newPassword;
 
     @FindBy(xpath = "//input[@id = 'confirmPassword']")
     private WebElement confirmNewPassword;
@@ -27,4 +27,13 @@ public class SetNewPasswordPage extends BasePage {
     public boolean isPageLoaded() {
         return setNewPasswordForm.isDisplayed();
     }
+
+    public SuccessResetPasswordPage setNewPasswordRequest(String newPass) {
+        newPassword.sendKeys(newPass);
+        confirmNewPassword.sendKeys(newPass);
+        newPasswordSubmit.click();
+
+        return new SuccessResetPasswordPage(driver);
+    }
+
 }

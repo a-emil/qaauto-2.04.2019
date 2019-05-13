@@ -10,10 +10,10 @@ public class ResetPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@id = 'username']")
     private WebElement userNameField;
 
-    @FindBy(xpath = "//form[@id='reset-password-form']")
+    @FindBy(xpath = "//form[@id = 'reset-password-form']")
     private WebElement resetPasswordForm;
 
-    @FindBy(xpath = "//button[@id='reset-password-submit-button']")
+    @FindBy(xpath = "//button[@id = 'reset-password-submit-button']")
     private WebElement resetPasswordSubmit;
 
 

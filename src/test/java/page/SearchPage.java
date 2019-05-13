@@ -14,7 +14,7 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//li[contains(@class, 'search-result search-result__occluded-item')]")
     private WebElement searchResultContainer;
 
-    @FindBy(xpath = "//div[@class='search-results-container']")
+    @FindBy(xpath = "//div[@class = 'search-results-container']")
     private List<WebElement> searchResultItems;
 
     public SearchPage(WebDriver driver) {

@@ -3,8 +3,6 @@ package page;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,20 +13,20 @@ public class CheckEmailPage extends BasePage {
     @FindBy(xpath = "//form[@id = 'sendemail-form']")
     private WebElement sendEmailForm;
 
-    @FindBy(xpath = "//input[@type='email']")
+    @FindBy(xpath = "//input[@type = 'email']")
     private WebElement userEmail;
 
-    @FindBy(xpath = "//input[@type='password']")
+    @FindBy(xpath = "//input[@type = 'password']")
     private WebElement userPassword;
 
-    @FindBy(xpath = "//div[@id='passwordNext']")
+    @FindBy(xpath = "//div[@id = 'passwordNext']")
     private WebElement gmailSubmit;
 
-    @FindBy(xpath = "//table//div[@class='yW']")
+    @FindBy(xpath = "//table//div[@class = 'yW']")
     private WebElement newEmail;
 
     @FindBy(xpath = "//table//tr[4]//p/a")
-    private WebElement newLink;
+    private WebElement newResetPasswordLink;
 
 
 
@@ -41,8 +39,8 @@ public class CheckEmailPage extends BasePage {
         return sendEmailForm.isDisplayed();
     }
 
-    public void goToGmailForLink(){
-        driver.get("https://accounts.google.com/signin/v2/identifier");
+    public SetNewPasswordPage goToGmailForLink(){
+        driver.get("https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin");
         userEmail.sendKeys("engineertestforreset70@gmail.com");
         userEmail.sendKeys(Keys.ENTER);
         try {
@@ -52,7 +50,9 @@ public class CheckEmailPage extends BasePage {
         }
         userPassword.sendKeys("Tester13)");
         gmailSubmit.click();
-        newLink.click();
+        newEmail.click();
+        newResetPasswordLink.click();
+        return new SetNewPasswordPage(driver);
     }
 
 }

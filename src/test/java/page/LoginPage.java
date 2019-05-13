@@ -9,19 +9,19 @@ import static java.lang.Thread.sleep;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "//input[@id='login-email']")
+    @FindBy(xpath = "//input[@id = 'login-email']")
     private WebElement userEmailLogin;
 
-    @FindBy(xpath = "//input[@id='login-password']")
+    @FindBy(xpath = "//input[@id = 'login-password']")
     private WebElement userPasswordLinkedin;
 
-    @FindBy(xpath = "//input[@id='login-submit']")
+    @FindBy(xpath = "//input[@id = 'login-submit']")
     private WebElement submitToLinkedin;
 
-    @FindBy(xpath = "//form[@id='regForm']")
+    @FindBy(xpath = "//form[@id = 'regForm']")
     private WebElement signUpForm;
 
-    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    @FindBy(xpath = "//a[@class = 'link-forgot-password']")
     private WebElement linkForgotPassword;
 
     public LoginPage(WebDriver driver) {
