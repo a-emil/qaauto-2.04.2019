@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import page.CheckEmailPage;
 import page.ResetPasswordPage;
 
+import java.util.concurrent.Callable;
+
 public class PasswordResetTest extends BaseTest {
 
     @Test
@@ -19,5 +21,6 @@ public class PasswordResetTest extends BaseTest {
         CheckEmailPage checkEmailPage = resetPasswordPage.ResetPasswordRequest(userName);
         Assert.assertTrue(checkEmailPage.isPageLoaded(), "CheckEmail page is not loaded");
 
+        checkEmailPage.goToGmailForLink();
     }
 }
