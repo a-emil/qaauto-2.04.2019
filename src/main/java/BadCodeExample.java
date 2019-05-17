@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
+
 public class BadCodeExample {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
