@@ -1,5 +1,10 @@
 package page;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import org.jsoup.select.Elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,13 +43,19 @@ public class ResetPasswordPage extends BasePage {
         gMailService.connect();
         resetPasswordSubmit.click();
 
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-        System.out.println("Content: " + message);
+        String htmlBody = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
+        //System.out.println("Content: " + htmlBody);
+
+        getLink(htmlBody);
 
         return new CheckEmailPage(driver);
-
-
     }
 
+    public void getLink(String htmlBody){
+        Document alinks = Jsoup.parse(htmlBody);
+        Elements links = alinks.select("a[href]");
+
+        System.out.println("Link: " + links);
+    }
 
 }

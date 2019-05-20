@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.CheckEmailPage;
 import page.ResetPasswordPage;
+import org.jsoup.Jsoup;
+
 import page.SetNewPasswordPage;
 import page.SuccessResetPasswordPage;
 
