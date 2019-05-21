@@ -1,9 +1,13 @@
 package test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import page.LoginPage;
 
 public class BaseTest {
@@ -12,12 +16,21 @@ public class BaseTest {
     private static String projectUrl = "https://www.linkedin.com";
 
 
+    @Parameters("browserName")
     @BeforeMethod
-    public void beforeMethod() {
-       // System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+    public void beforeMethod(@Optional("chrome") String browserName) throws Exception {
+        if(browserName.toLowerCase().equals("chrome")){
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
+        else if(browserName.toLowerCase().equals("firefox")){
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
+        else {
+            throw new Exception("Unsupported browser name");
+        }
 
-        driver = new ChromeDriver();
         driver.get(projectUrl);
         loginPage = new LoginPage(driver);
     }

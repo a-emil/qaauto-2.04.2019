@@ -44,20 +44,18 @@ public class ResetPasswordPage extends BasePage {
         resetPasswordSubmit.click();
 
         String htmlBody = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-
-        getResetPasswordLink(htmlBody);
-
+        driver.get(getResetPasswordLink(htmlBody));
         return new SetNewPasswordPage(driver);
     }
 
-    public String getResetPasswordLink(String htmlBody){
+    public String getResetPasswordLink(String htmlBody) {
         String resetPasswotdLink;
         Document htmlDocument = Jsoup.parse(htmlBody);
         Elements listOflinks = htmlDocument.select("a[abs:href]");
 
-        for( Element link : listOflinks) {
+        for (Element link : listOflinks) {
             if (link.text().equals("Reset my password")) {
-                resetPasswotdLink = link.attr("abs:href").toString();
+                resetPasswotdLink = link.attr("abs:href");
                 return resetPasswotdLink;
             }
         }
