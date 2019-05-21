@@ -32,7 +32,7 @@ public class ResetPasswordPage extends BasePage {
         return resetPasswordForm.isDisplayed();
     }
 
-    public CheckEmailPage ResetPasswordRequest(String userName) {
+    public SetNewPasswordPage ResetPasswordRequest(String userName) {
         userNameField.sendKeys(userName);
 
         String messageSubject = "here's the link to reset your password";
@@ -44,18 +44,24 @@ public class ResetPasswordPage extends BasePage {
         resetPasswordSubmit.click();
 
         String htmlBody = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
-        //System.out.println("Content: " + htmlBody);
 
-        getLink(htmlBody);
+        getResetPasswordLink(htmlBody);
 
-        return new CheckEmailPage(driver);
+        return new SetNewPasswordPage(driver);
     }
 
-    public void getLink(String htmlBody){
-        Document alinks = Jsoup.parse(htmlBody);
-        Elements links = alinks.select("a[href]");
+    public String getResetPasswordLink(String htmlBody){
+        String resetPasswotdLink;
+        Document htmlDocument = Jsoup.parse(htmlBody);
+        Elements listOflinks = htmlDocument.select("a[abs:href]");
 
-        System.out.println("Link: " + links);
+        for( Element link : listOflinks) {
+            if (link.text().equals("Reset my password")) {
+                resetPasswotdLink = link.attr("abs:href").toString();
+                return resetPasswotdLink;
+            }
+        }
+        return "";
     }
 
 }

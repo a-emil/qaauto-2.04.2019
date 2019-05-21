@@ -30,6 +30,7 @@ public class SetNewPasswordPage extends BasePage {
 
     public SuccessResetPasswordPage setNewPasswordRequest(String newPass) {
 
+        driver.get(resetPasswordLink);
         newPassword.sendKeys(newPass);
         confirmNewPassword.sendKeys(newPass);
         newPasswordSubmit.click();

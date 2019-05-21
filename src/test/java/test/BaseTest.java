@@ -14,8 +14,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
+       // System.setProperty("webdriver.chrome.driver", "C:/Users/chromedriver_win32/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/emil/IdeaProjects/chromedriver");
 
         driver = new ChromeDriver();
         driver.get(projectUrl);

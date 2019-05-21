@@ -2,9 +2,7 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.CheckEmailPage;
 import page.ResetPasswordPage;
-import org.jsoup.Jsoup;
 
 import page.SetNewPasswordPage;
 import page.SuccessResetPasswordPage;
@@ -21,16 +19,15 @@ public class PasswordResetTest extends BaseTest {
 
         Assert.assertTrue(resetPasswordPage.isPageLoaded(), "ResetPassword page is not loaded");
 
-        CheckEmailPage checkEmailPage = resetPasswordPage.ResetPasswordRequest(userName);
-        Assert.assertTrue(checkEmailPage.isPageLoaded(), "CheckEmail page is not loaded");
+        SetNewPasswordPage setNewPasswordPage = resetPasswordPage.ResetPasswordRequest(userName);
+        Assert.assertTrue(setNewPasswordPage.isPageLoaded(), "CheckEmail page is not loaded");
 
-//        SetNewPasswordPage setNewPasswordPage = checkEmailPage.goToGmailForLink();
-//        Assert.assertTrue(setNewPasswordPage.isPageLoaded(), "SetNewPassword page is not loaded");
-//
-//        SuccessResetPasswordPage successResetPasswordPage = setNewPasswordPage.setNewPasswordRequest(newPassword);
-//
-//        Assert.assertTrue(successResetPasswordPage.isPageLoaded(), "SuccessResetPassword page is not loaded");
-//        Assert.assertEquals(successResetPasswordPage.getHeaderText(), "Your password has been changed successfully");
-//        Assert.assertTrue(successResetPasswordPage.isGoToHomePageButton(), "GoToHomePage button is not loaded");
+        Assert.assertTrue(setNewPasswordPage.isPageLoaded(), "SetNewPassword page is not loaded");
+
+        SuccessResetPasswordPage successResetPasswordPage = setNewPasswordPage.setNewPasswordRequest(newPassword);
+
+        Assert.assertTrue(successResetPasswordPage.isPageLoaded(), "SuccessResetPassword page is not loaded");
+        Assert.assertEquals(successResetPasswordPage.getHeaderText(), "Your password has been changed successfully");
+        Assert.assertTrue(successResetPasswordPage.isGoToHomePageButton(), "GoToHomePage button is not loaded");
     }
 }
