@@ -13,12 +13,12 @@ import page.LoginPage;
 public class BaseTest {
     private WebDriver driver;
     protected LoginPage loginPage;
-    private static String projectUrl = "https://www.linkedin.com";
+    private String projectUrl;
 
 
-    @Parameters("browserName")
+    @Parameters({"browserName", "localization"})
     @BeforeMethod
-    public void beforeMethod(@Optional("chrome") String browserName) throws Exception {
+    public void beforeMethod(@Optional("chrome") String browserName, @Optional("EN") String localization) throws Exception {
         if(browserName.toLowerCase().equals("chrome")){
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
@@ -31,12 +31,21 @@ public class BaseTest {
             throw new Exception("Unsupported browser name");
         }
 
-        driver.get(projectUrl);
+        if (localization.equals("UA")){
+            driver.get("https://ua.linkedin.com");
+        }
+        else if (localization.equals("DE")) {
+            driver.get("https://de.linkedin.com");
+        }
+        else {
+            driver.get("https://en.linkedin.com");
+        }
+
         loginPage = new LoginPage(driver);
     }
 
     @AfterMethod
     public void afterMethod() {
-        driver.quit();
+        //driver.quit();
     }
 }
